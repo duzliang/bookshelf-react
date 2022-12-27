@@ -1,17 +1,16 @@
 import React from "react";
-import { ThemeContext } from "./context";
+import connect from "./connect";
 
-export default class Children extends React.Component {
+class Children extends React.Component {
   render() {
     return (
-      <ThemeContext.Consumer>
-        {context => (
-          <div>
-            {context.store.getState().count}
-            <button onClick={() => context.store.add()}>add 1</button>
-          </div>
-        )}
-      </ThemeContext.Consumer>
+      <div>
+        {this.props.getState().count}
+        <button onClick={() => this.props.dispatch({ type: 'AddOne' })}>add 1</button>
+        <button onClick={() => this.props.dispatch({ type: 'MultiThree' })}>multi 3</button>
+      </div>
     )
   }
 }
+
+export default connect(Children);
