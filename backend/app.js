@@ -23,14 +23,16 @@ app.get('/', function (req, res) {
 });
 
 app.get('/items', function (req, res) {
-  res.send(todoItems);
+  res.send({ code: 0, data: todoItems });
 });
 
 app.post('/items', function (req, res) {
   console.log('add:', req.body)
-  if (req.body.todoItem) {
-    todoItems = [...todoItems, req.body.todoItem];
-    res.send(todoItems);
+  const newItem = req.body.todoItem;
+  newItem.id = todoItems.length + 1; // id
+  if (newItem) {
+    todoItems = [...todoItems, newItem];
+    res.send({ code: 0, data: todoItems });
   }
 });
 
@@ -42,8 +44,7 @@ app.delete('/items', function (req, res) {
         item.delete = true;
       }
     })
-
-    res.send(todoItems);
+    res.send({ code: 0, data: todoItems });
   }
 })
 
