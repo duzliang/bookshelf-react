@@ -4,7 +4,7 @@ import Home from "../views/home/Home";
 import Books from '../views/books/List'
 
 import Todos from '../views/todos';
-import StoreApp from '../views/stores/App';
+import StoreApp from '../views/couter/App';
 import TodosRedux from '../views/todos-redux/index'
 import TodosRTK from '../views/todos-rtk/App'
 import TodosMobx from '../views/todos-mobx/index'

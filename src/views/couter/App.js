@@ -2,6 +2,9 @@ import React from "react";
 import { ThemeContext, store } from "./context";
 import Children from "./Children";
 
+/**
+ * 使用React Context API模拟实现redux模式
+ */
 export default class App extends React.Component {
   constructor() {
     super();
