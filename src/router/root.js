@@ -7,7 +7,7 @@ import Todos from '../views/todos';
 import StoreApp from '../views/stores/App';
 import TodosRedux from '../views/todos-redux/index'
 import TodosRTK from '../views/todos-rtk/App'
-import TodosMobx from '../views/todos-mobx/App'
+import TodosMobx from '../views/todos-mobx/index'
 
 export const routes = createBrowserRouter([
   {
