@@ -1,7 +1,23 @@
 # bookshelf-react
-Bookshelf via react
+Bookshelf via react for frontend and Node,egg,MongoDB for backend.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project frontend was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and backend was build with Node, Egg, MongoDB.
+
+## Project Structure
+
+### Backend
+
+| 技术    | 版本 | 备注 |
+| :------ | ---- | ---- |
+| Nodejs  |      |      |
+| Egg     |      |      |
+| MongoDB |      |      |
+
+## Project Plan
+
+1. Books simple manage for CRUD v1.0
+2. Weapp barcode scanner v1.0
+3. ReactNative client v1.0
 
 ## Available Scripts
 
