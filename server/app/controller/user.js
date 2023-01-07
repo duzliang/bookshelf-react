@@ -8,8 +8,11 @@ class UserController extends Controller {
     const { username, password } = ctx.request.body;
 
     if (username && password) {
-      await ctx.service.user.register(username, password);
-      ctx.body = { username, password };
+      const result = await ctx.service.user.register(username, password);
+      ctx.body = {
+        status: 'ok',
+        msg: '注册成功',
+      };
     } else {
       ctx.body = {
         status: 'error',
@@ -31,8 +34,8 @@ class UserController extends Controller {
         },
         this.config.jwt.secret,
         {
-          expiresIn: 3600,
-        }
+          expiresIn: 3600 * 60 * 24,
+        },
       );
       ctx.body = {
         status: 'ok',

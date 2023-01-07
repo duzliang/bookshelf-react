@@ -17,8 +17,15 @@ module.exports = appInfo => {
 
   // add your middleware config here
   config.middleware = [
-    // 'jwtauth',
+    'jwtauth',
   ];
+
+  config.jwtauth = {
+    match(ctx) {
+      const url = ctx.request.url;
+      return !(url.startsWith('/api/login') || url.startsWith('/api/register'));
+    },
+  };
 
   config.mongoose = {
     client: {
@@ -29,12 +36,8 @@ module.exports = appInfo => {
     },
   };
 
-  config.jwtauth = {
-    secret: 'jwt_secret',
-  };
-
   config.cors = {
-    origin: 'http://localhost:8081',
+    origin: 'http://localhost:3000',
     credentials: true,
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
   };
@@ -48,7 +51,7 @@ module.exports = appInfo => {
       },
     },
     domainWhiteList: [
-      'http://localhost:8081',
+      'http://localhost:3000',
     ],
   };
 
