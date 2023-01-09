@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import {
   BookOutlined,
   CodeOutlined,
@@ -29,11 +29,35 @@ const items = [
   ]),
 ];
 
+  // todo 待完善
+const breadcrumbNameMap = {
+  '/book': '图书管理',
+  '/book/list': '列表',
+  'book/*': '详情',
+};
+
 const App = (props) => {
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
+  const location = useLocation();
+  const pathSnippets = location.pathname.split('/').filter((i) => i);
+
+  const extraBreadcrumbItems = pathSnippets.map((_, index) => {
+    const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
+    return (
+      <Breadcrumb.Item key={url}>
+        <Link to={url}>{breadcrumbNameMap[url]}</Link>
+      </Breadcrumb.Item>
+    );
+  });
+  const breadcrumbItems = [
+    <Breadcrumb.Item key="home">
+      <Link to="/">首页</Link>
+    </Breadcrumb.Item>,
+  ].concat(extraBreadcrumbItems);
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -65,8 +89,7 @@ const App = (props) => {
         />
         <Content style={{ margin: '0 16px' }}>
           <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
+            {breadcrumbItems}
           </Breadcrumb>
 
           <Outlet />

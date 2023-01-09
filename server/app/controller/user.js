@@ -12,6 +12,7 @@ class UserController extends Controller {
       ctx.body = {
         status: 'ok',
         msg: '注册成功',
+        detail: result,
       };
     } else {
       ctx.body = {

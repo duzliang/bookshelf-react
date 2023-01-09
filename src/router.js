@@ -8,7 +8,6 @@ import Register from './views/login/Register';
 
 import Books from './views/books/List';
 import BookDetail from './views/books/Detail';
-import BookEdit from './views/books/Edit';
 
 import Todos from './views/todos';
 import StoreApp from './views/couter/App';
@@ -29,10 +28,6 @@ const router = createBrowserRouter([
       {
         path: '/book/:id',
         element: <BookDetail />,
-      },
-      {
-        path: '/book/edit/:id',
-        element: <BookEdit />,
       },
       {
         path: '/todos',

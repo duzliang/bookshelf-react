@@ -100,17 +100,10 @@ class BookController extends Controller {
       publish_date,
     };
     const result = await ctx.service.book.edit(params);
-    if (result._id) {
-      ctx.body = {
-        status: 0,
-        detail: result,
-      };
-    } else {
-      ctx.body = {
-        status: -1,
-        statusText: '操作失败',
-      };
-    }
+    ctx.body = {
+      status: 0,
+      detail: result,
+    };
   }
 
   async delete() {

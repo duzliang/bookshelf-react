@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { DatePicker, Form, Input, Modal, message, Button } from 'antd';
 
 import dayjs from 'dayjs';
 
-import API from '../../utils/api';
-import server from '../../utils/server';
+import { getBooks, getBook, add, edit } from '../../features/book/bookSlice';
 
 const Edit = ({ id }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
+  const dispatch = useDispatch();
 
   const showModal = () => {
     setIsModalOpen(true);
 
     if (id) {
-      server.get(API.book.detail(id)).then(({ detail }) => {
+      dispatch(getBook(id)).unwrap().then(detail => {
         form.setFieldsValue({
           title: detail.title,
           sub_title: detail.sub_title,
@@ -24,27 +25,27 @@ const Edit = ({ id }) => {
           publisher: detail.publisher,
           publish_date: dayjs(detail.publish_date, 'YYYY-MM'),
         });
-      });
+      })
     }
   };
   const handleOk = () => {
     const values = form.getFieldsValue();
     if (id) {
       values._id = id;
-      server.patch(API.book.edit(), values).then(res => {
-        if (res.status === 0) {
-          message.success('编辑成功');
-          setIsModalOpen(false);
-        }
-      });
-    } else {
-      server.post(API.book.add(), values).then(res => {
-        if (res.status === 0) {
-          message.success('添加成功');
-          setIsModalOpen(false);
-        }
-      });
     }
+    dispatch(id ? edit(values) : add(values)).unwrap()
+      .then(res => {
+        if (res.status === 0) {
+          message.success(id ? '编辑成功' : '添加成功');
+          dispatch(getBooks());
+          setIsModalOpen(false);
+        } else {
+          message.error('操作失败');
+        }
+      })
+      .catch(err => {
+        message.error(`操作失败[${err}]`);
+      });
   };
   const handleCancel = () => {
     setIsModalOpen(false);

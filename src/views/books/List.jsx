@@ -1,33 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import { Table, Space, Modal, message } from 'antd';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { Table, Space, Modal, message } from 'antd';
 
-import API from '../../utils/api';
-import server from '../../utils/server';
+import { getBooks, remove } from '../../features/book/bookSlice';
 
 import Edit from './Edit';
 
+/**
+ * @note const canSave = [title, content].every(Boolean) && addRequestStatus === 'idle'
+ * @returns 
+ */
 export default function List() {
-  const [list, setList] = useState([]);
+  const status = useSelector(state => state.book.status);
+  const list = useSelector(state => state.book.list);
+  const dispatch = useDispatch();
+
+  console.log('status', status)
 
   useEffect(() => {
-    getList();
-  }, []);
-
-  const getList = () => {
-    server.get(API.book.list()).then(res => setList(res.list));
-  };
+    if (status === 'idle') {
+      dispatch(getBooks());
+    }
+  }, [status, dispatch]);
 
   const handleDelete = (id) => {
     Modal.confirm({
       title: '确定要删除吗？',
       onOk: () => {
-        server.delete(API.book.delete(id)).then(res => {
-          if (res.status === 0) {
-            message.success('删除成功');
-            getList();
-          }
-        });
+        /**
+       *  example: await dispatch(addNewPost({ title, content, user: userId })).unwrap()
+       *  unwrap() return a new Promise has the actual action.payload value from a fulfilled action, or throws an error if it's the rejected action.
+       */
+        dispatch(remove(id)).unwrap()
+          .then(res => {
+            if (res.status === 0) {
+              message.success('删除成功');
+              dispatch(getBooks());
+            } else {
+              message.error('操作失败');
+            }
+          })
+          .catch(err => {
+            message.error(`操作失败[${err}]`);
+          });
       },
     });
   };
@@ -78,7 +94,7 @@ export default function List() {
       render: (id) => (
         <Space size="middle">
           <Edit id={id} />
-          <a onClick={() => handleDelete(id)}>删除</a>
+          <a href='#' onClick={() => handleDelete(id)}>删除</a>
         </Space>
       ),
     },
@@ -89,7 +105,12 @@ export default function List() {
       <div style={{ marginBottom: 10, float: 'right' }}>
         <Edit />
       </div>
-      <Table rowKey={record => record._id} dataSource={list} columns={columns} />
+      <Table
+        loading={status === 'loading'}
+        rowKey={record => record._id}
+        dataSource={list}
+        columns={columns}
+      />
     </>
   );
 }

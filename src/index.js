@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { ConfigProvider } from 'antd';
 import './index.css';
+
+import store from './store';
 
 // antd 国际化配置
 import 'dayjs/locale/zh-cn';
@@ -15,9 +18,11 @@ import router from './router';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ConfigProvider locale={locale}>
-      <RouterProvider router={router} />
-    </ConfigProvider>;
+    <Provider store={store}>
+      <ConfigProvider locale={locale}>
+        <RouterProvider router={router} />
+      </ConfigProvider>;
+    </Provider>
   </React.StrictMode>,
 );
 
