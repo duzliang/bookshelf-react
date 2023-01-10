@@ -11,7 +11,7 @@ export default function Detail() {
 
   useEffect(() => {
     dispatch(getBook(id))
-  }, [dispatch, id]);
+  }, [id]);
 
   return (
     <div>
