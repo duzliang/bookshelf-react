@@ -66,9 +66,15 @@ const App = (props) => {
           style={{
             height: 32,
             margin: 16,
+            textAlign: 'center',
+            fontSize: 22,
+            color: '#fff',
+            fontWeight: 'bold',
             background: 'rgba(255, 255, 255, 0.2)',
           }}
-        />
+        >
+          图书管理系统
+        </div>
         <Menu
           theme="dark"
           defaultSelectedKeys={['1']}

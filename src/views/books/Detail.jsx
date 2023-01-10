@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import API from '../../utils/api';
-import server from '../../utils/server';
+import { getBook } from '../../features/book/bookSlice';
 
 export default function Detail() {
   const { id } = useParams();
-
-  const [detail, setDetail] = useState({});
+  const dispatch = useDispatch();
+  const detail = useSelector(state => state.book.detail);
 
   useEffect(() => {
-    server.get(API.book.detail(id)).then(res => setDetail(res.detail));
-  }, []);
+    dispatch(getBook(id))
+  }, [dispatch, id]);
 
   return (
     <div>

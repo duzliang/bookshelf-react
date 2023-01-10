@@ -45,6 +45,9 @@ export const bookSlice = createSlice({
       .addCase(getBooks.rejected, (state, action) => {
         state.status = 'failed';
       })
+      .addCase(getBook.fulfilled, (state, action) => {
+        state.detail = action.payload;
+      })
   }
 })
 

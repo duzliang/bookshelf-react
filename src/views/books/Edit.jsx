@@ -8,8 +8,8 @@ import { getBooks, getBook, add, edit } from '../../features/book/bookSlice';
 
 const Edit = ({ id }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [form] = Form.useForm();
   const dispatch = useDispatch();
+  const [form] = Form.useForm();
 
   const showModal = () => {
     setIsModalOpen(true);
