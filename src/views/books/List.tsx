@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Table, Space, Modal, message } from 'antd';
+import type { ColumnType } from 'antd/es/table';
 
 import { getBooks, remove } from '../../features/book/bookSlice';
 
@@ -15,8 +16,6 @@ export default function List() {
   const status = useSelector(state => state.book.status);
   const list = useSelector(state => state.book.list);
   const dispatch = useDispatch();
-
-  console.log('status', status)
 
   useEffect(() => {
     if (status === 'idle') {

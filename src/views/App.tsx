@@ -1,23 +1,31 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import {
   BookOutlined,
   CodeOutlined,
 } from '@ant-design/icons';
+import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-function getItem(label, key, icon, children) {
+type MenuItem = Required<MenuProps>['items'][number];
+
+function getItem(
+  label: React.ReactNode,
+  key: React.Key,
+  icon?: React.ReactNode,
+  children?: MenuItem[],
+): MenuItem {
   return {
     key,
     icon,
     children,
     label,
-  };
+  } as MenuItem;
 }
 
-const items = [
+const items: MenuItem[] = [
   getItem('图书', 'book', <BookOutlined />, [
     getItem(<Link to="/book/list">书籍管理</Link>, 'list'),
   ]),
@@ -29,14 +37,14 @@ const items = [
   ]),
 ];
 
-  // todo 待完善
+// todo 待完善
 const breadcrumbNameMap = {
   '/book': '图书管理',
   '/book/list': '列表',
   'book/*': '详情',
 };
 
-const App = (props) => {
+function App() {
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
@@ -45,19 +53,19 @@ const App = (props) => {
   const location = useLocation();
   const pathSnippets = location.pathname.split('/').filter((i) => i);
 
-  const extraBreadcrumbItems = pathSnippets.map((_, index) => {
-    const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
-    return (
-      <Breadcrumb.Item key={url}>
-        <Link to={url}>{breadcrumbNameMap[url]}</Link>
-      </Breadcrumb.Item>
-    );
-  });
-  const breadcrumbItems = [
-    <Breadcrumb.Item key="home">
-      <Link to="/">首页</Link>
-    </Breadcrumb.Item>,
-  ].concat(extraBreadcrumbItems);
+  // const extraBreadcrumbItems = pathSnippets.map((_, index) => {
+  //   const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
+  //   return (
+  //     <Breadcrumb.Item key={url}>
+  //       <Link to={url}>{breadcrumbNameMap[url]}</Link>
+  //     </Breadcrumb.Item>
+  //   );
+  // });
+  // const breadcrumbItems = [
+  //   <Breadcrumb.Item key="home">
+  //     <Link to="/">首页</Link>
+  //   </Breadcrumb.Item>,
+  // ].concat(extraBreadcrumbItems);
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -80,9 +88,6 @@ const App = (props) => {
           defaultSelectedKeys={['1']}
           mode="inline"
           items={items}
-          onClick={({ item, key, keyPath, e }) => {
-            console.log('log=>menu click:', key, keyPath);
-          }}
         />
       </Sider>
 
@@ -94,22 +99,19 @@ const App = (props) => {
           }}
         />
         <Content style={{ margin: '0 16px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
+          {/* <Breadcrumb style={{ margin: '16px 0' }}>
             {breadcrumbItems}
-          </Breadcrumb>
+          </Breadcrumb> */}
 
           <Outlet />
         </Content>
 
-        <Footer
-          style={{
-            textAlign: 'center',
-          }}
-        >
+        <Footer style={{ textAlign: 'center' }}>
           DuerOS ©2023 Created by Duke
         </Footer>
       </Layout>
     </Layout>
   );
 };
+
 export default App;
