@@ -13,13 +13,6 @@ import UserDetail from './views/user/Detail';
 import Books from './views/books/List';
 import BookDetail from './views/books/Detail';
 
-// for test
-import Todos from './views/todos';
-import StoreApp from './views/couter/App';
-import TodosRedux from './views/todos-redux';
-import TodosRTK from './views/todos-rtk/App';
-import TodosMobx from './views/todos-mobx';
-
 const router = createBrowserRouter([
   {
     path: '/',
@@ -42,27 +35,6 @@ const router = createBrowserRouter([
         path: '/books/:id',
         element: <BookDetail />,
       },
-
-      {
-        path: '/todos',
-        element: <Todos />,
-      },
-      {
-        path: '/store-app',
-        element: <StoreApp />,
-      },
-      {
-        path: '/todos-redux',
-        element: <TodosRedux />,
-      },
-      {
-        path: '/todos-rtk',
-        element: <TodosRTK />,
-      },
-      {
-        path: '/todos-mobx',
-        element: <TodosMobx />,
-      },
     ],
   },
   {
@@ -74,7 +46,7 @@ const router = createBrowserRouter([
     element: <Register />,
   },
   {
-    path: '/home',
+    path: '/',
     element: '<div>home</div>',
   },
 ]);

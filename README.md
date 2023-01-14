@@ -13,11 +13,28 @@ This project frontend was bootstrapped with [Create React App](https://github.co
 | Egg     |      |      |
 | MongoDB |      |      |
 
+### Frontend
+
+| 技术                                           | 版本  | 备注 |
+| :--------------------------------------------- | ----- | ---- |
+| react                                          | 18.*  |      |
+| react-router                                   | 6*    |      |
+| redux @reduxjs/toolkit redux-thunk react-redux | 4.2.* |      |
+| axios                                          | 1.2   |      |
+| ant-design                                     | 5.*   |      |
+| less sass                                      |       |      |
+| webpack                                        |       |      |
+
 ## Project Plan
 
-1. Books simple manage for CRUD v1.0
-2. Weapp barcode scanner v1.0
-3. ReactNative client v1.0
+- [x] Books simple manage for CRUD v1.0
+- [x] Users CRUD
+- [x] reduxjs/toolkit
+- [ ] use reduxjs/toolkit query refactor redux store
+- [ ] webpack
+- [ ] use sass or less write styles
+- [ ] Weapp barcode scanner v1.0
+- [ ] ReactNative client v1.0
 
 ## Available Scripts
 

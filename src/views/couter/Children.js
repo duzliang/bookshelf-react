@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import connect from "./connect";
 
 class Children extends React.Component {
@@ -27,6 +28,12 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: 'MultiThree' })
     }
   }
+}
+
+Children.propTypes = {
+  count: PropTypes.number,
+  AddOne: PropTypes.func,
+  MultiThree: PropTypes.func,
 }
 
 export default connect(mapStateToProps)(mapDispatchToProps)(Children);

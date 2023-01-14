@@ -3,7 +3,6 @@ import { Link, Outlet, useLocation } from 'react-router-dom';
 import {
   BookOutlined,
   UserOutlined,
-  CodeOutlined,
 } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 
@@ -24,13 +23,6 @@ const items = [
   ]),
   getItem('用户', 'user', <UserOutlined />, [
     getItem(<Link to="/users">用户管理</Link>, 'users'),
-  ]),
-
-  getItem('实验室', 'lab', <CodeOutlined />, [
-    getItem(<Link to="/store-app">TODO ContextAPI</Link>, 'todo_context_api'),
-    getItem(<Link to="/todos-redux">TODO_Redux</Link>, 'todo_redux'),
-    getItem(<Link to="/todos-rtk">TODO_RTK</Link>, 'todo_rtk'),
-    getItem(<Link to="/todos-mobx">TODO_Mobx</Link>, 'todo_mobx'),
   ]),
 ];
 

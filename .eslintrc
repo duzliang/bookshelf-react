@@ -1,4 +1,5 @@
 {
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "ecmaVersion": 7,
     "sourceType": "module"
@@ -7,10 +8,6 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended"
-  ],
-  "ignorePatterns": [
-    "./src/views/todos*",
-    "./src/*.text.jsx$"
   ],
   "globals": {
     "localStorage": "readonly",

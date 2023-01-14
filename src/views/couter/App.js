@@ -15,7 +15,7 @@ export default class App extends React.Component {
     }
   }
 
-  _updateState = () => {
+  _updateState() {
     const state = this.state.store.getState();
     this.setState(state);
   }
