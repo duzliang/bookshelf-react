@@ -10,10 +10,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
-
     server.post(API.user.register(), values).then(res => {
-      console.log('log=>register res:', res);
       if (res.status === 'ok') {
         message.success('注册成功');
         setTimeout(() => {

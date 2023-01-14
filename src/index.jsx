@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { ConfigProvider } from 'antd';
 import './index.css';
 
-import store from './store';
+import store from './stores/index';
 
 // antd 国际化配置
 import 'dayjs/locale/zh-cn';

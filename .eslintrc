@@ -7,5 +7,13 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended"
-  ]
+  ],
+  "ignorePatterns": [
+    "./src/views/todos*",
+    "./src/*.text.jsx$"
+  ],
+  "globals": {
+    "localStorage": "readonly",
+    "setTimeout": "readonly"
+  }
 }

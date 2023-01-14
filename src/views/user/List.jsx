@@ -3,22 +3,18 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Table, Space, Modal, message } from 'antd';
 
-import { getBooks, remove } from '../../stores/bookSlice';
+import { getUsers, remove } from '../../stores/userSlice';
 
 import Edit from './Edit';
 
-/**
- * @note const canSave = [title, content].every(Boolean) && addRequestStatus === 'idle'
- * @returns 
- */
 export default function List() {
-  const status = useSelector(state => state.book.status);
-  const list = useSelector(state => state.book.list);
+  const status = useSelector(state => state.user.status);
+  const list = useSelector(state => state.user.list);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (status === 'idle') {
-      dispatch(getBooks());
+      dispatch(getUsers());
     }
   }, [status, dispatch]);
 
@@ -34,7 +30,7 @@ export default function List() {
           .then(res => {
             if (res.status === 0) {
               message.success('删除成功');
-              dispatch(getBooks());
+              dispatch(getUsers());
             } else {
               message.error('操作失败');
             }
@@ -48,41 +44,21 @@ export default function List() {
 
   const columns = [
     {
-      title: '名称',
-      dataIndex: 'title',
-      key: 'title',
-      render: (title, record) => <Link to={`/books/${record._id}`}>{title}</Link>,
+      title: '用户名',
+      dataIndex: 'username',
+      key: 'username',
+      render: (username, record) => <Link to={`/users/${record._id}`}>{username}</Link>,
     },
     {
-      title: '副标题',
-      dataIndex: 'sub_title',
-      key: 'sub_title',
+      title: '创建时间',
+      dataIndex: 'create_at',
+      key: 'create_at',
+      render: val => new Date(val).toLocaleDateString(),
     },
     {
-      title: '封面',
-      dataIndex: 'binding',
-      key: 'binding',
-      render: url => <img src={url} alt="" width={100} />,
-    },
-    {
-      title: '作者',
-      dataIndex: 'author',
-      key: 'author',
-    },
-    {
-      title: '价格',
-      dataIndex: 'price',
-      key: 'price',
-    },
-    {
-      title: '出版社',
-      dataIndex: 'publisher',
-      key: 'publisher',
-    },
-    {
-      title: '出版时间',
-      dataIndex: 'publish_date',
-      key: 'publish_date',
+      title: '修改时间',
+      dataIndex: 'update_at',
+      key: 'update_at',
       render: val => new Date(val).toLocaleDateString(),
     },
     {

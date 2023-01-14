@@ -10,10 +10,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
-
     server.post(API.user.login(), values).then(res => {
-      console.log('log=>login res:', res);
       if (res.status === 'ok') {
         message.success('登录成功');
         localStorage.setItem('token', res.token);

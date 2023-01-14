@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import {
   BookOutlined,
+  UserOutlined,
   CodeOutlined,
 } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
@@ -19,8 +20,12 @@ function getItem(label, key, icon, children) {
 
 const items = [
   getItem('图书', 'book', <BookOutlined />, [
-    getItem(<Link to="/book/list">书籍管理</Link>, 'list'),
+    getItem(<Link to="/books">书籍管理</Link>, 'books'),
   ]),
+  getItem('用户', 'user', <UserOutlined />, [
+    getItem(<Link to="/users">用户管理</Link>, 'users'),
+  ]),
+
   getItem('实验室', 'lab', <CodeOutlined />, [
     getItem(<Link to="/store-app">TODO ContextAPI</Link>, 'todo_context_api'),
     getItem(<Link to="/todos-redux">TODO_Redux</Link>, 'todo_redux'),
@@ -29,14 +34,15 @@ const items = [
   ]),
 ];
 
-  // todo 待完善
+// todo 待完善
 const breadcrumbNameMap = {
-  '/book': '图书管理',
-  '/book/list': '列表',
-  'book/*': '详情',
+  '/books': '图书管理',
+  '/books/*': '详情',
+  '/users': '用户管理',
+  '/users/*': '详情',
 };
 
-const App = (props) => {
+const App = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
@@ -80,9 +86,6 @@ const App = (props) => {
           defaultSelectedKeys={['1']}
           mode="inline"
           items={items}
-          onClick={({ item, key, keyPath, e }) => {
-            console.log('log=>menu click:', key, keyPath);
-          }}
         />
       </Sider>
 
@@ -101,11 +104,7 @@ const App = (props) => {
           <Outlet />
         </Content>
 
-        <Footer
-          style={{
-            textAlign: 'center',
-          }}
-        >
+        <Footer style={{ textAlign: 'center' }}>
           DuerOS ©2023 Created by Duke
         </Footer>
       </Layout>

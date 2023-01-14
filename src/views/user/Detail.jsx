@@ -2,21 +2,21 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { getBook } from '../../stores/bookSlice';
+import { getUser } from '../../stores/userSlice';
 
 export default function Detail() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const detail = useSelector(state => state.book.detail);
+  const detail = useSelector(state => state.user.detail);
 
   useEffect(() => {
-    dispatch(getBook(id))
+    dispatch(getUser(id))
   }, [dispatch, id]);
 
   return (
     <div>
-      <h1>书名: {detail.title}</h1>
-      <p>副标题：{detail.sub_title}</p>
+      <h1>用户名: {detail.username}</h1>
+      <p>创建时间：{detail.create_at}</p>
     </div>
   );
 }

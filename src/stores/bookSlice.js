@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import server from '../../utils/server';
-import API from '../../utils/api';
+import server from '../utils/server';
+import API from '../utils/api';
 
 export const getBooks = createAsyncThunk('book/getBooks', async () => {
   const res = await server.get(API.book.list());
@@ -35,14 +35,14 @@ export const bookSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(getBooks.pending, (state, action) => {
+      .addCase(getBooks.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(getBooks.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.list = action.payload; // if not modify status, we can `return action.payload` directly
       })
-      .addCase(getBooks.rejected, (state, action) => {
+      .addCase(getBooks.rejected, (state) => {
         state.status = 'failed';
       })
       .addCase(getBook.fulfilled, (state, action) => {
