@@ -88,7 +88,7 @@ export default function List() {
     {
       title: '操作',
       dataIndex: '_id',
-      key: 'id',
+      key: '_id',
       render: (id) => (
         <Space size="middle">
           <Edit id={id} />

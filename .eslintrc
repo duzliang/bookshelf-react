@@ -10,6 +10,7 @@
     "plugin:react-hooks/recommended"
   ],
   "globals": {
+    "document": "readonly",
     "localStorage": "readonly",
     "setTimeout": "readonly"
   }

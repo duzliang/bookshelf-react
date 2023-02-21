@@ -1,0 +1,7 @@
+const path = require('path');
+
+module.exports = {
+  entry: {
+    path: path.resolve(__dirname, 'src/index.jsx')
+  }
+};

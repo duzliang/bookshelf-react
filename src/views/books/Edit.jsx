@@ -110,7 +110,7 @@ const Edit = ({ id }) => {
 };
 
 Edit.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
 };
 
 export default Edit;
