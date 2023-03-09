@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import { getBook } from '../../features/book/bookSlice';
 
+
 export default function Detail() {
   const { id } = useParams();
   const dispatch = useDispatch();

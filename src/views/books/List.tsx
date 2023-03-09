@@ -3,16 +3,25 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Table, Space, Modal, message } from 'antd';
 import type { ColumnType } from 'antd/es/table';
+import type { Book } from './entity';
+import Edit from './Edit';
 
 import { getBooks, remove } from '../../features/book/bookSlice';
 
-import Edit from './Edit';
+type listProp = {
+  status: string,
+  list: Book[],
+}
+
+type listState = {
+  book: {},
+}
 
 /**
  * @note const canSave = [title, content].every(Boolean) && addRequestStatus === 'idle'
- * @returns 
+ * @returns
  */
-export default function List() {
+export default function List<props: listProp; state: listState>() {
   const status = useSelector(state => state.book.status);
   const list = useSelector(state => state.book.list);
   const dispatch = useDispatch();

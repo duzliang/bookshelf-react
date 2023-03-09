@@ -1,8 +1,7 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import {
   BookOutlined,
-  CodeOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
@@ -28,12 +27,6 @@ function getItem(
 const items: MenuItem[] = [
   getItem('图书', 'book', <BookOutlined />, [
     getItem(<Link to="/book/list">书籍管理</Link>, 'list'),
-  ]),
-  getItem('实验室', 'lab', <CodeOutlined />, [
-    getItem(<Link to="/store-app">TODO ContextAPI</Link>, 'todo_context_api'),
-    getItem(<Link to="/todos-redux">TODO_Redux</Link>, 'todo_redux'),
-    getItem(<Link to="/todos-rtk">TODO_RTK</Link>, 'todo_rtk'),
-    getItem(<Link to="/todos-mobx">TODO_Mobx</Link>, 'todo_mobx'),
   ]),
 ];
 
